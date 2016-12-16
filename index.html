@@ -78,7 +78,7 @@
 			</tr>
 			<tr ng-class="{selecionado:contato.selecionado}" ng-repeat = "contato in contatos">
 				<td><input type="checkbox" ng-model="contato.selecionado"/></td>
-				<td>{{contato.nome}}</td>
+				<td>{{contato.nome | uppercase}}</td>
 				<td>{{contato.telefone}}</td>
 				<td>{{contato.operadora.nome}}</td>
 				<td><div style="width:20px; height:20px;" ng-style="{'background-color': contato.cor}"></div></td>
@@ -87,7 +87,7 @@
 		<hr/>
 		<form name="contatoForm">
 		<input class="form-control" ng-model="contato.nome" name = "nome" type="text" placeholder="Nome" ng-required="true" />
-		<input class="form-control" ng-model="contato.telefone" name = "telefone" type="text" placeholder="Telefone" ng-required="true" />
+		<input class="form-control" ng-model="contato.telefone" name = "telefone" type="text" placeholder="Telefone" ng-required="true" ng-pattern="/^\d{8,9}$/" />
 		<select class="form-control" ng-model="contato.operadora" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras">
 			<option value="">Selecione uma operadora</option>
 		</select>
@@ -95,7 +95,7 @@
 		<div ng-show="contatoForm.nome.$invalid && contatoForm.nome.$dirty" class="alert alert-danger">
 			Preencha nome
 		</div>
-		<div ng-show="contatoForm.telefone.$invalid && contatoForm.telefone.$dirty" class="alert alert-danger">
+		<div ng-show="contatoForm.telefone.$invalid && contatoForm.telefone.$dirty"  class="alert alert-danger">
 			Preencha telefone
 		</div>
 		{{contato}}
